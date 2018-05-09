@@ -1,0 +1,560 @@
+<odoo>
+    <data>
+
+        <!--first year design-->
+
+        <record model="ir.ui.view" id="student_form_fy_view">
+            <field name="name">Knowledge High School</field>
+            <field name="model">fy.details</field>
+            <field name="arch" type="xml">
+                <form string="Information Form">
+                    <sheet>
+                        <group>
+                            <field name="img" widget="image"/>
+                            <h1><field name="name"/></h1>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="roll_no_id"/>
+                                <field name="address"/>
+                                <field name="state"/>
+                                <field name="active_fy"/>
+                                <field name="teacher_id"/>
+                            </group>
+                            <group>
+                                <field name="email_id"/>
+                                <field name="mobile_no"/>
+                                <field name="marks"/>
+                                <field name="div"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="student_tree_fy_view">
+            <field name="name">Knowledge High School</field>
+            <field name="model">fy.details</field>
+            <field name="arch" type="xml">
+                <tree string="Information">
+
+                    <field name="name"/>
+                    <field name="roll_no_id"/>
+                    <field name="address"/>
+                    <field name="state"/>
+                    <field name="email_id"/>
+                    <field name="mobile_no"/>
+                    <field name="active_fy"/>
+                    <field name="marks"/>
+                    <field name="div"/>
+                    <field name="teacher_id"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="search_view_fy_view">
+            <field name="name">fy.details.seach.view</field>
+            <field name="model">fy.details</field>
+            <field name="arch" type="xml">
+                <search string="Fy search">
+                    <field name="name"/>
+                    <field name="address"/>
+                    <field name="state"/>
+                    <field name="active_fy"/>
+                    <filter string="Active" domain="[('active_fy', '=', True)]"/>
+                    <filter string="Gujarat" domain="[('state', '=', 'gujarat')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="State" name="state_group_by"
+                                context="{'group_by':'state'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="graph_view_fy_hjj">
+            <field name="name">graph.view.fy.bgkn</field>
+            <field name="model">fy.details</field>
+            <field name="arch" type="xml">
+                <graph string="graphjkjkfy">
+                    <field name="marks"/>
+                    <field name="max"/>
+
+                </graph>
+            </field>
+        </record>
+
+
+        <!--record model="ir.ui.view" id="graph_view_fy">
+            <field name="name">graph.view_fy</field>
+            <field name="model">fy.details</field>
+            <field name="arch" type="xml">
+                <graph string="graph.fy" type="pivot" stacked ="True">
+                    <field name="marks"/>
+                    <field name="max"/>
+
+                </graph>
+            </field>
+        </record-->
+
+
+
+        <record  id="student_view_calenderdddd" model="ir.ui.view">
+            <field name="name">school.calendar.viewdddd</field>
+            <field name="model">fy.details</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <calendar string="student_info" date_start="date_action">
+                    <field name="name"/>
+                    <field name="address"/>
+                </calendar>
+            </field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="kanban_viereetyw_fy">
+            <field name="name">kanban.viewsdf.fy</field>
+            <field name="model">fy.details</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state">
+                    <field name="name"/>
+                    <field name="address"/>
+                    <field name="color"/>
+                    <field name="state"/>
+                    <field name="img"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_card oe_kanban_global_click">
+                                <div class="o_dropdown_kanban dropdown">
+                                    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                        <span class="fa fa-bars fa-lg pull-right"/>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <!--<div class="o_dropdown_kanban dropdown">-->
+                                <!--<a class="dropdown-toggle btn" data-toggle="dropdown" href="#">-->
+                                <!--<span class="fa fa-bars fa-lg"/>-->
+                                <!--</a>-->
+                                <!--<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">-->
+                                <!--<t t-if="widget.editable"><li><a type="edit">Edit</a></li></t>-->
+                                <!--<t t-if="widget.deletable"><li><a type="delete">Delete</a></li></t>-->
+                                <!--</ul>-->
+                                <!--</div>-->
+                                <a t-if="!read_only_mode" type="delete" class="fa fa-times pull-right"/>
+                                <a t-if="!read_only_mode" type="edit" class="fa fa-pencil pull-right"/>
+                                <div class="o_kanban_image">
+                                    <!--<field name="img" widget="image"/>-->
+                                    <!--<img t-att-src=""/>-->
+                                    <img t-att-src="kanban_image('fy.details', 'img', record.id.value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <field name="name"/>
+                                        <br/>
+                                        <field name="address"/>
+                                    </h4>
+                                </div>
+                            </div>
+
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!--second year design-->
+
+        <record model="ir.ui.view" id="student_form_sy_view">
+            <field name="name">Knowledge High School</field>
+            <field name="model">sy.details</field>
+            <field name="arch" type="xml">
+                <form string="Information Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="roll_no_ids" domain="[('is_student','=',True)]"/>
+                            <field name="address"/>
+                            <field name="state"/>
+                            <field name="active_sy"/>
+                        </group>
+                        <group>
+                            <field name="email_id"/>
+                            <field name="mobile_no"/>
+                            <field name="marks"/>
+                            <field name="teacher_id"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="student_tree_sy_view">
+            <field name="name">Knowledge High School</field>
+            <field name="model">sy.details</field>
+            <field name="arch" type="xml">
+                <tree string="Information">
+
+                    <field name="name"/>
+                    <field name="roll_no_ids" />
+                    <field name="address"/>
+                    <field name="state"/>
+                    <field name="email_id"/>
+                    <field name="mobile_no"/>
+                    <field name="active_sy"/>
+                    <field name="marks"/>
+                    <field name="teacher_id"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="search_view_sy_view">
+            <field name="name">sy.details.seach.view</field>
+            <field name="model">sy.details</field>
+            <field name="arch" type="xml">
+                <search string="Sy search">
+                    <field name="name"/>
+                    <field name="address"/>
+                    <field name="state"/>
+                    <field name="active_sy"/>
+                    <filter string="Active" domain="[('active_sy', '=', True)]"/>
+                    <filter string="Gujarat" domain="[('state', '=', 'gujarat')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="State" name="state_group_by"
+                                context="{'group_by':'state'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="calender_view_sy">
+            <field name="name">sy.calender</field>
+            <field name="model">sy.details</field>
+            <field name="arch" type="xml">
+                <calendar string="student_sy_info" date_start="date_action">
+                    <field name="name"/>
+                    <field name="address"/>
+                </calendar>
+            </field>
+        </record>
+
+
+
+
+        <record model="ir.ui.view" id="graph_view_sy_hjj">
+            <field name="name">graph.view.sy.bgkn</field>
+            <field name="model">sy.details</field>
+            <field name="arch" type="xml">
+                <graph string="graphjkjkfy">
+                    <field name="marks"/>
+
+
+                </graph>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="kanban_view_sy">
+            <field name="name">kanban.viewsdf.sy</field>
+            <field name="model">sy.details</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="address"/>
+                    <!--<field name="img"/>-->
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <a t-if="!read_only_mode" type="delete" class="fa fa-times pull-right"/>
+                                <a t-if="!read_only_mode" type="edit" class="fa fa-pencil pull-right"/>
+                                <div class="o_kanban_image">
+                                    <!--<img t-att-src="kanban_image('fy.details', 'img', record.id.value)"/>-->
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <field name="name"/>
+                                        <br/>
+                                    </h4>
+                                    <field name="address"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+
+        <!--Teacher-->
+
+
+        <record model="ir.ui.view" id="teacher_form_viewwww">
+            <field name="name">teacher.form.viewee</field>
+            <field name="model">teacher.teacher</field>
+            <field name="arch" type="xml">
+                <form string="teacher Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="student_ids">
+                                <form string="Students" name="students">
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="email_id"/>
+                                        <field name="sequence" readonly="True"/>
+                                    </group>
+                                </form>
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="email_id"/>
+                                    <field name="sequence" />
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="arel_ids">
+                                <form string="Students" name="students">
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="email_id"/>
+                                    </group>
+                                </form>
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="email_id"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="teacher_form_view">
+            <field name="name">teacher.form.view</field>
+            <field name="model">teacher.teacher</field>
+            <field name="arch" type="xml">
+                <tree string="Teacher_details">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--Customer Information-->
+
+        <record model="ir.ui.view" id="custo_tree_view">
+            <field name="name">customer.tree.view</field>
+            <field name="model">customer.cust</field>
+            <field name="arch" type="xml">
+                <tree string="customer_info">
+                    <field name="select"/>
+                    <field name="name"/>
+                    <field name="name1"/>
+                    <field name="service"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="custo_form_view">
+            <field name="name">customer.form.view</field>
+            <field name="model">customer.cust</field>
+            <field name="arch" type="xml">
+                <form string="customer.form">
+                    <sheet>
+                        <group>
+                            <field name="select"/>
+                            <field name="name"/>
+                            <field name="name1"/>
+                            <field name="service"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="hist_tree_view">
+            <field name="name">Hist.tree.view</field>
+            <field name="model">customer.history1</field>
+            <field name="arch" type="xml">
+                <tree string="customer_hist">
+                    <field name="date_time"/>
+                    <field name="problem"/>
+                    <field name="next_date"/>
+                    <field name="prec"/>
+                    <field name="cust_id"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="custo_form_view">
+            <field name="name">hist.form.view</field>
+            <field name="model">customer.history1</field>
+            <field name="arch" type="xml">
+                <form string="hist.form">
+                    <sheet>
+                        <group>
+                            <field name="date_time"/>
+                            <field name="problem"/>
+                            <field name="next_date"/>
+                            <field name="prec"/>
+                            <field name="cust_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!--Roll NO-->
+
+        <record id="rno_form_view" model="ir.ui.view">
+            <field name="name">Rollno_form</field>
+            <field name="model">r.no</field>
+            <field name="arch" type="xml">
+                <form string="rno.form">
+                    <sheet>
+                        <group>
+                            <field name="img" widget="image"/>
+                            <group>
+                                <field name="rno"/>
+                                <field name="name"/>
+                                <field name="address"/>
+                                <field name="state"/>
+                            </group>
+                            <group>
+                                <field name="email_id"/>
+                                <field name="mobile_no"/>
+                                <field name="marks"/>
+                                <field name="is_student"/>
+                                <field name="is_teacher"/>
+                            </group>
+
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="rno_tree_view">
+            <field name="name">Rollno_tree</field>
+            <field name="model">r.no</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="rno"/>
+                    <field name="name"/>
+
+                    <field name="address"/>
+                    <field name="state"/>
+                    <field name="email_id"/>
+                    <field name="mobile_no"/>
+                    <field name="marks"/>
+                    <field name="is_student"/>
+                    <field name="is_teacher"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="kanban_view_rno">
+            <field name="name">kanban.viewsdf.roll</field>
+            <field name="model">r.no</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="address"/>
+                    <field name="img"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <a t-if="!read_only_mode" type="delete" class="fa fa-times pull-right"/>
+                                <a t-if="!read_only_mode" type="edit" class="fa fa-pencil pull-right"/>
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('fy.details', 'img', record.id.value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <field name="name"/>
+                                        <br/>
+                                    </h4>
+                                    <field name="address"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!--action-->
+
+
+        <record id="action_stdent" model="ir.actions.act_window">
+            <field name="name">School fy</field>
+            <field name="res_model">fy.details</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,calendar,form,graph</field>
+            <field name="search_view_id" ref="search_view_fy_view"/>
+        </record>
+
+        <record id="action_student" model="ir.actions.act_window">
+            <field name="name">School sy</field>
+            <field name="res_model">sy.details</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,calendar,form,graph</field>
+            <field name="search_view_id" ref="search_view_sy_view"/>
+        </record>
+
+        <record id="action_teacherrrr" model="ir.actions.act_window">
+            <field name="name">Teacherrrr</field>
+            <field name="res_model">teacher.teacher</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_customer" model="ir.actions.act_window">
+            <field name="name">Customer</field>
+            <field name="res_model">customer.cust</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="action_History" model="ir.actions.act_window">
+            <field name="name">History</field>
+            <field name="res_model">customer.history1</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_Rollno" model="ir.actions.act_window">
+            <field name="name">Rollno</field>
+            <field name="res_model">r.no</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <menuitem id="menu_student" name="School" sequence="10"/>
+
+        <menuitem id="menu_student1" parent="menu_student" name="Student Details" sequence="10"
+                  action="action_stdent"/>
+        <menuitem id="menu_firstyear" parent="menu_student1" name="First Year" sequence="10"
+                  action="action_stdent"/>
+        <menuitem id="menu_secondyear" parent="menu_student1" name="Second Year" sequence="10"
+                  action="action_student"/>
+        <menuitem id="menu_teacher" parent="menu_student1" name="Teacher" sequence="10"
+                  action="action_teacherrrr"/>
+
+        <menuitem id="menu_cust" parent="menu_student1" name="Customer" sequence="10"
+                  action="action_customer"/>
+        <menuitem id="menu_hist" parent="menu_student1" name="History" sequence="10"
+                  action="action_History"/>
+        <menuitem id="menu_rno" parent="menu_student1" name="Rollno" sequence="10"
+                  action="action_Rollno"/>
+    </data>
+</odoo>

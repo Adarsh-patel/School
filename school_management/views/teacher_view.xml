@@ -1,0 +1,141 @@
+<odoo>
+    <data>
+
+        <record id="teacher_form_rwevieweee" model="ir.ui.view">
+            <field name="name">school.form.view</field>
+            <field name="model">school.school</field>
+            <field name="arch" type="xml">
+                <form string="school form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="teacher">
+                                <form name="teacher" string="Teacher">
+                                    <group>
+                                        <field name="name"/>
+                                    </group>
+                                </form>
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="teacher_student_form_viewfffff" model="ir.ui.view">
+            <field name="name">teacher.school.form.view</field>
+            <field name="model">school.teacher.student</field>
+            <field name="arch" type="xml">
+                <form string="school form">
+                    <header>
+                        <button name="action_draft" type="object"
+                                string="Reset to draft"
+                                attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                        <button name="action_confirm" type="object"
+                                string="Confirm"
+                                class="oe_highlight"
+                                attrs="{'invisible': [('state', 'in', ('confirm','done'))]}"/>
+                        <button name="action_done" type="object"
+                                string="Mark as done"
+                                class="oe_highlight"
+                                attrs="{'invisible': [('state', '!=', 'confirm')]}"/>
+                        <field name="state" widget="statusbar"/>
+
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="school_name"
+                                   attrs="{'readonly': [('state', '=', 'done')],'required':[('state','=','confirm')]}"/>
+                            <field name="teacher">
+                                <form name="teacher" string="Teacher">
+                                    <group>
+                                        <field name="name"/>
+                                    </group>
+                                </form>
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="student">
+                                <form name="student" string="Student">
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="roll_no_id"/>
+                                        <field name="address"/>
+                                        <field name="state"/>
+                                    </group>
+                                </form>
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="roll_no_id"/>
+                                    <field name="address"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <!--<field name="state"/>-->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="teacher_tree_vieweeee" model="ir.ui.view">
+            <field name="name">teacher.tree.view</field>
+            <field name="model">school.school</field>
+            <field name="arch" type="xml">
+                <tree string="tree view of school">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="teacher_student_tree_vieweee" model="ir.ui.view">
+            <field name="name">teacher.school.tree.view</field>
+            <field name="model">school.teacher.student</field>
+            <field name="arch" type="xml">
+                <tree string="tree view">
+                    <field name="school_name"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+
+        <record id="action_schoolddddddd" model="ir.actions.act_window">
+            <field name="name">school</field>
+            <field name="res_model">school.school</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_teacher_studenteeeeee" model="ir.actions.act_window">
+            <field name="name">teacher</field>
+            <field name="res_model">school.teacher.student</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+
+        <menuitem id="menu_school" parent="menu_student1" name="School" sequence="10"
+                  action="action_schoolddddddd"/>
+        <menuitem id="menu_teacher_student" parent="menu_student1" name="Teacher_student" sequence="10"
+                  action="action_teacher_studenteeeeee"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="calculate_form_view">
+            <field name="name">calculate perc</field>
+            <field name="model">percentage.calc</field>
+            <field name="arch" type="xml">
+                <form string="calculation form">
+
+                    <sheet>
+                        <group col="4">
+                            <field name="java"/>
+                            <field name="c"/>
+                            <field name="python"/>
+                            <field name="dbms"/>
+                            <field name="ds"/>
+                        </group>
+                        <group>
+                        <label for="perc"   />
+                            <h3>
+                            <field name="perc" string="percentage"/>
+                            </h3>
+
+                        </group>
+
+                        <group>
+                           <field name="total_marks"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="calculate_tree_view">
+            <field name="name">calculate_tree</field>
+            <field name="model">percentage.calc</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="java"/>
+                    <field name="c"/>
+                    <field name="python"/>
+                    <field name="dbms"/>
+                    <field name="ds"/>
+                    <field name="perc"/>
+                </tree>
+            </field>
+        </record>
+
+<!--Action-->
+
+        <record id="action_per" model="ir.actions.act_window">
+            <field name="name">Subject Result Calculator</field>
+            <field name="res_model">percentage.calc</field>
+             <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+          <menuitem id="menu_per" parent="menu_student1" name="Subject Result" sequence="10"
+                  action="action_per"/>
+    </data>
+</odoo>

@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="wizard_form_view">
+            <field name="name">wizard.form</field>
+            <field name="model">example.wizard</field>
+            <field name="arch" type="xml">
+                <form string="jadnj">
+                    <group>
+                        <field name="rno"/>
+                        <field name="name"/>
+                        <field name="address"/>
+                        <field name="mobile_no" size="10"/>
+                        <field name="email"/>
+                    </group>
+                    <footer>
+                        <button name="create_rollno" string="Save" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="create_teacher_form">
+            <field name="name">create.form</field>
+            <field name="model">create.teacher.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Create Teacher">
+                    <sheet>
+                        <group>
+                        <field name="name"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="create_tech" string="Save" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_add_listing" model="ir.actions.act_window">
+            <field name="name">Add student</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">example.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_create_teacher" model="ir.actions.act_window">
+            <field name="name">Create Teacher</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">create.teacher.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <!--<menuitem id="menu_student" name="RollNo" sequence="10" action="action_add_listing"/>-->
+
+        <menuitem id="menu_teacher_create" parent="menu_student1" name="Create_Teacher" sequence="10"
+                  action="action_create_teacher"/>
+    </data>
+</odoo>

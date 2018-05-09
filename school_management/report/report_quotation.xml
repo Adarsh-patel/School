@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_quotation">
+        <t t-call="report.external_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div>
+                            Order NO.:  <span style="font-weight: bold;" t-field="o.name"/>
+                        </div>
+                        <div class="text-right">
+                            <strong> Customer Name ::</strong>
+                            <span t-field="o.partner_id"/>
+                        </div><br/>
+                        <div t-if="o.confirmation_date" class="text-right">
+                            <strong> Confirmation Date ::</strong>
+                            <span t-field="o.confirmation_date"/>
+                        </div><br/>
+                        <div t-if="o.payment_term_id" class="text-right">
+                            <strong> Payment Terms ::</strong>
+                            <span t-field="o.payment_term_id"/>
+                        </div><br/>
+                        <div t-if="o.payment_mode" class="col-xs-6">
+                            <strong> Payment Mode ::</strong>
+                            <span t-field="o.payment_mode"/>
+                        </div><br/>
+                            <br/><br/><br/>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Description</th>
+                                    <th class="text-right">Quantity</th>
+                                    <th class="text-right">Unit Price</th>
+                                    <th class="text-right" groups="sale.group_show_price_subtotal">SubTotal</th>
+                                </tr>
+                            </thead >
+                            <tbody class="sale_tbody">
+                                <t t-foreach="o.order_line" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <span t-field="line.product_id"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.product_uom_qty"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.price_unit"/>
+                                        </td>
+                                        <td>
+                                            <t t-set="subtotal" t-value="line.product_uom_qty * line.price_unit"/>
+                                            <span t-esc="subtotal" />
+                                        </td>
+
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <div style="float:right;">
+                        <b> Total :  <span t-field="o.amount_total"/></b>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
